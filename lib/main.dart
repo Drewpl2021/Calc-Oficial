@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:calc_app/comp/CustomAppBar.dart';
 import 'package:calc_app/theme/AppTheme.dart';
@@ -46,27 +48,43 @@ class CalcAppState extends State<CalcApp> {
       switch (operador) {
         case "/":
           _controller.text =
-              (int.parse(valorAnt) / int.parse(_controller.text)).toString();
+              (double.parse(valorAnt) / double.parse(_controller.text)).toString();
           break;
         case "*":
           _controller.text =
-              (int.parse(valorAnt) * int.parse(_controller.text)).toString();
+              (double.parse(valorAnt) * double.parse(_controller.text)).toString();
           break;
         case "+":
           _controller.text =
-              (int.parse(valorAnt) + int.parse(_controller.text)).toString();
+              (double.parse(valorAnt) + double.parse(_controller.text)).toString();
           break;
         case "-":
           _controller.text =
-              (int.parse(valorAnt) - int.parse(_controller.text)).toString();
+              (double.parse(valorAnt) - double.parse(_controller.text)).toString();
           break;
         case "%":
           _controller.text =
-              (int.parse(valorAnt) % int.parse(_controller.text)).toString();
+              (double.parse(valorAnt) % double.parse(_controller.text)).toString();
+          break;
+        case "√":
+          _controller.text = (sqrt(double.parse(_controller.text))).toString();
+          break;
+        case "^2":
+          _controller.text =
+              (pow(double.parse(_controller.text), 2)).toString();
+          break;
+        case "^":
+          _controller.text = (pow(
+              double.parse(valorAnt), double.parse(_controller.text)))
+              .toString();
+          break;
+        case "π":
+          _controller.text = (pi).toString();
           break;
       }
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +94,7 @@ class CalcAppState extends State<CalcApp> {
       ["7", "8", "9", "*"],
       ["4", "5", "6", "-"],
       ["1", "2", "3", "+"],
+      ["√", "^2", "^", "π"],
       [".", "0", "00", "="]
     ];
     List<List> funx = [
@@ -83,6 +102,7 @@ class CalcAppState extends State<CalcApp> {
       [numClick, numClick, numClick, opeClick],
       [numClick, numClick, numClick, opeClick],
       [numClick, numClick, numClick, opeClick],
+      [opeClick, opeClick, opeClick, opeClick],
       [numClick, numClick, numClick, resultOperacion]
     ];
 
